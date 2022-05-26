@@ -1,0 +1,17 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+--selector s, uMin,dMin, uHor, dHor sOut
+ENTITY alarm IS
+PORT(
+	
+);
+END ENTITY;
+
+ARCHITECTURE arq OF alarm IS
+	
+BEGIN 
+		
+		
+		
+END ARCHITECTURE;

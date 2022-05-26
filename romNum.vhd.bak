@@ -1,0 +1,46 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY romNum IS
+PORT(
+	bus_dir: IN STD_LOGIC_VECTOR( 1 DOWNTO 0 );
+	cs: IN STD_LOGIC;
+	bus_datos: OUT STD_LOGIC_VECTOR( 6 DONWTO 0 )
+);
+END ENTITY;
+
+ARCHITECTURE arq OF romNum IS
+	CONSTANT l0: INTEGER := 0;
+	CONSTANT l1: INTEGER := 1;
+	CONSTANT l2: INTEGER := 2;
+	CONSTANT l3: INTEGER := 3;
+	CONSTANT l4: INTEGER := 4;
+	CONSTANT l5: INTEGER := 5;
+	CONSTANT l6: INTEGER := 6;
+	CONSTANT l7: INTEGER := 7;
+	CONSTANT l8: INTEGER := 8;
+	CONSTANT l9: INTEGER := 9;
+	
+	TYPE memoria IS ARRAY( 3 DOWNTO 0 ) OF STD_LOGIC_VECTOR( 6 DOWNTO 0 );
+	CONSTANT mem_rom: memoria :=( la, ll, l0, lh );
+	
+	SIGNAL dato: STD_LOGIC_VECTOR( 6 DONWTO 0 );
+	
+BEGIN 
+
+	prom: PROCESS( bus_dir ) BEGIN 
+		dato <= mem_rom( conv_integer( bus_dir ) );
+	
+	END PROCESS prom;
+	
+	pbuf PROCESS( dato, cs ) BEGIN
+		IF( cs = '1' ) THEN
+			bus_datos <= dato;
+		ELSE
+			bus_datos <= ( OTHERS => 'Z' );
+		END IF;
+	END PROCESS pbuf;
+	
+END ARCHITECTURE;

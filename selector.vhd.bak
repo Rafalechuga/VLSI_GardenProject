@@ -1,0 +1,20 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY selector IS
+PORT(
+	s: IN STD_LOGIC_VECTOR( 1 DOWNTO 0 )
+	sOut: OUT INTEGER RANGE 0 TO 6
+);
+END ENTITY;
+
+ARCHITECTURE arq OF selector IS
+BEGIN 
+		WITH s SELECT
+			sOut <= 	0 	WHEN "00", --Programa riego 0
+						1 	WHEN "01", --Programa riego 1
+						2 	WHEN "10", --Programa riego 2
+						3 	WHEN "011", --Ajustar hora riego
+						(OTHERS => '0') WHEN OTHERS;
+END ARCHITECTURE;
